@@ -1,0 +1,2 @@
+Platform is win32
+Architecture is x64
