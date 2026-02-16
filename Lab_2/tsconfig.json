@@ -2,9 +2,9 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
+    // "rootDir": "./src",//from where it should compile
     // "outDir": "./dist",
-
+    //"baseUrl": "./", //for mono repo
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "commonjs",
@@ -12,7 +12,7 @@
     //"types": [],
     // For nodejs:
     // "lib": ["esnext"],
-    "types": ["node"],//trying to solve "cannot find module" error for fs and path
+    //"types": ["node"],//trying to solve "cannot find module" error for fs and path
     // and npm install -D @types/node
 
     // Other Outputs
