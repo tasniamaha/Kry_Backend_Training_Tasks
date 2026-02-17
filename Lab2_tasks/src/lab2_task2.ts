@@ -26,7 +26,7 @@ else if(command=='basename'){
 }
 else if(command=='extname'){
     if( args.length!=2){
-        console.error('Should have one filepath')
+        console.error('Should have one file name')
         process.exit(1)
     }
     console.log(path.extname(args[1]))
