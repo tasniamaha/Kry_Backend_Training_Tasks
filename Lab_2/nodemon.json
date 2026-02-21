@@ -1,5 +1,0 @@
-{
-    "watch": ["src"],
-    "build": "tsc",
-    "exec":"ts-node ./src/index.ts"
-}
