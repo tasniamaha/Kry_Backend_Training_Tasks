@@ -1,7 +1,9 @@
 import http from 'http'
 import fs from 'fs'
 
+
 const filePath = 'data/users.json'
+
 
 const server = http.createServer((req, res) => {
     if (req.url === '/read') {
