@@ -1,13 +1,13 @@
 {
-  "name": "kry_backend_training_tasks",
+  "name": "petshop-backend",
   "version": "1.0.0",
   "main": "index.ts",
   "repository": "https://github.com/tasniamaha/Kry_Backend_Training_Tasks.git",
   "author": "tasniamaha <tasniamaha17march@gmail.com>",
   "license": "MIT",
-  "scripts": {
-    "dev:lab3": "nodemon --watch petshop_backend/src --ext ts --exec ts-node petshop_backend/src/server.ts" 
-  },
+"scripts": {
+  "dev":"nodemon"
+},
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
