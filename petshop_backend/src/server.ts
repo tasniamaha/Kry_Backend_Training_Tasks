@@ -1,6 +1,6 @@
 import { createServer } from 'http'
 import app from './app'
-
+import { Logger } from './utils/logger'
 const portNumber:number=8000
 
 // app.listen(portNumber,()=>{
@@ -10,10 +10,11 @@ async function server(port:number):Promise<void>{
 
     const nodeServer=createServer(app)
 
-    nodeServer.listen(port,()=>{
-        console.log(`Server running at http://localhost:${port}`)
-    })
+    nodeServer.listen(port, () => {
+    Logger.info(`Server running at http://localhost:${port}`)
+})
     nodeServer.on('error',(error:NodeJS.ErrnoException)=>{
+        Logger.error('Server error',error)
         nodeServer.close()
     })
 }
