@@ -1,0 +1,42 @@
+{
+  "name": "pedal-tournament-backend",
+  "version": "1.0.0",
+  "author": "tasniamaha",
+  "license": "MIT",
+  "repository": "https://github.com/tasniamaha/Kry_Backend_Training_Tasks.git",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@typegoose/typegoose": "^13.2.1",
+    "argon2": "^0.44.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "dotenv-expand": "^12.0.3",
+    "helmet": "^8.1.0",
+    "mongodb": "^7.1.0",
+    "mongoose": "^9.3.0",
+    "typegoose": "^5.9.1",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "winston-mongodb": "^7.0.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^7.7.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/helmet": "^4.0.0",
+    "@types/node": "^25.3.0",
+    "eslint": "^10.0.3",
+    "express": "^5.2.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "node": "^25.6.1",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
