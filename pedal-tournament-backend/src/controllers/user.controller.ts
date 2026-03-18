@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express'
 import type { CommonController } from '../types/core.type'
 import { createUserService, getUserbyUsernameService } from '../services'
+import { Logger } from '../utils/logger'
 
 export const signUpController: CommonController = async (req, res) => {
   try {
@@ -9,11 +10,7 @@ export const signUpController: CommonController = async (req, res) => {
 
     const usernameExists = await getUserbyUsernameService(username)
     if (usernameExists) {
-      res.status(400).json({
-        success: false,
-        message: 'Username already exists',
-        data: { username },
-      })
+      res.status(400).json({ message: 'Username already exists', data: { username } })
       return
     }
 
@@ -38,29 +35,24 @@ export const signUpController: CommonController = async (req, res) => {
       role: user?.role,
     }
     res.status(201).json({
-      success: true,
+      succes: true,
       message: 'User created successfully',
       data: userResponse,
     })
   }
   catch (error: unknown) {
-    // Handle MongoDB duplicate key error
+    Logger.error('signUpController error', error) // ← correct usage
+
     if (
       typeof error === 'object'
       && error !== null
       && 'code' in error
       && (error as { code: number }).code === 11000
     ) {
-      res.status(400).json({
-        success: false,
-        message: 'Email already exists',
-      })
+      res.status(400).json({ success: false, message: 'Email already exists' })
       return
     }
 
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error',
-    })
+    res.status(500).json({ success: false, message: 'Internal server error' })
   }
 }
