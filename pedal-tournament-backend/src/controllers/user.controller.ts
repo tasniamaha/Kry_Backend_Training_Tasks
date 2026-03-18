@@ -9,7 +9,11 @@ export const signUpController: CommonController = async (req, res) => {
 
     const usernameExists = await getUserbyUsernameService(username)
     if (usernameExists) {
-      res.status(400).json({ message: 'Username already exists', data: { username } })
+      res.status(400).json({
+        success: false,
+        message: 'Username already exists',
+        data: { username },
+      })
       return
     }
 
@@ -34,12 +38,29 @@ export const signUpController: CommonController = async (req, res) => {
       role: user?.role,
     }
     res.status(201).json({
-      succes: true,
+      success: true,
       message: 'User created successfully',
       data: userResponse,
     })
   }
-  catch (error) {
-    res.status(500).json({ message: 'Internal server error', error })
+  catch (error: unknown) {
+    // Handle MongoDB duplicate key error
+    if (
+      typeof error === 'object'
+      && error !== null
+      && 'code' in error
+      && (error as { code: number }).code === 11000
+    ) {
+      res.status(400).json({
+        success: false,
+        message: 'Email already exists',
+      })
+      return
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+    })
   }
 }
