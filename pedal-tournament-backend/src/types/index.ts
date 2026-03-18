@@ -1,1 +1,1 @@
-export * from {Request,Response} from 'express'
+export * from './core.type'

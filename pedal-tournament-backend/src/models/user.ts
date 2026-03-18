@@ -1,14 +1,14 @@
-import { pre, prop } from '@typegoose/typegoose'
-import { argon2d } from 'argon2'
+import { getModelForClass, pre, prop } from '@typegoose/typegoose'
+import * as argon2 from 'argon2'
 
 @pre<User>('save', async function () {
-  if (this.isModified('password')) {
+  if (!this.isModified('password')) {
     return
   }
 
-  if (this.passoword) {
-    const hash = await argon2d.hash(this.passoword)
-    this.passoword = hash
+  if (this.password) {
+    const hash = await argon2.hash(this.password)
+    this.password = hash
   }
 })
 export class User {
@@ -18,7 +18,7 @@ export class User {
   @prop({ required: true, maxlength: 20 })
   lastName!: string
 
-  @prop({ required: true, maxlength: 40 })
+  @prop({ required: false, maxlength: 40 })
   fullName!: string
 
   @prop({ type: String, required: true, unique: true })
@@ -42,3 +42,5 @@ export class User {
   @prop({ type: String, required: true, enum: ['user', 'admin'] })
   role!: 'user' | 'admin'
 }
+
+export const UserModel = getModelForClass(User)
