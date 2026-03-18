@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express'
 import type { CommonController } from '../types/core.type'
 import { createUserService, getUserbyUsernameService } from '../services'
+import { Logger } from '../utils/logger'
 
 export const signUpController: CommonController = async (req, res) => {
   try {
@@ -39,7 +40,19 @@ export const signUpController: CommonController = async (req, res) => {
       data: userResponse,
     })
   }
-  catch (error) {
-    res.status(500).json({ message: 'Internal server error', error })
+  catch (error: unknown) {
+    Logger.error('signUpController error', error) // ← correct usage
+
+    if (
+      typeof error === 'object'
+      && error !== null
+      && 'code' in error
+      && (error as { code: number }).code === 11000
+    ) {
+      res.status(400).json({ success: false, message: 'Email already exists' })
+      return
+    }
+
+    res.status(500).json({ success: false, message: 'Internal server error' })
   }
 }
